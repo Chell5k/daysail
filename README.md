@@ -71,7 +71,7 @@ Daysail is a web application that aims to connect recreational sailors and sailb
 [ ]
 
 #### Additional Tools
-Lucid Chart
+- Lucid Chart
 
 #### Database Schema
 ![](./doc_imgs/Daysail_DB_ERD.png)
