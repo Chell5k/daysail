@@ -45,15 +45,15 @@ Daysail is a web application that aims to connect recreational sailors and sailb
 
 ## Components
 
-Landing page
-Registration Page
-Login page
-Crete new boat
-View of all boats
-View of one boat
-View "faves"
-Edit boat details
-Delete boat
+- Landing page
+- Registration Page
+- Login page
+- Crete new boat
+- View of all boats
+- View of one boat
+- View "faves"
+- Edit boat details
+- Delete boat
 
 ## Project Design
 ### Wireframes
