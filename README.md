@@ -6,8 +6,28 @@
 
 [Screenshot of main page]
 
-# Table of Contents
-[ ]
+Table of Contents
+=================
+
+   * [Daysail](#daysail)
+   * [Table of Contents](#table-of-contents)
+         * [Overview](#overview)
+      * [User Stories](#user-stories)
+      * [Screenshots](#screenshots)
+      * [Components](#components)
+      * [Project Design](#project-design)
+         * [Wireframes](#wireframes)
+         * [Technology](#technology)
+            * [Core](#core)
+            * [Middleware](#middleware)
+            * [Additional Tools](#additional-tools)
+            * [Database Schema](#database-schema)
+      * [Code Snippets](#code-snippets)
+      * [Challenges](#challenges)
+      * [MVP](#mvp)
+      * [Post MVP](#post-mvp)
+
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 ### Overview
 Daysail is a web application that aims to connect recreational sailors and sailboat owners. Recreational sailors get to see the boats in their area and can express interest with "likes", and owners get to see how much interest there is in their boats.
