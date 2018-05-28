@@ -1,4 +1,4 @@
-let fname = 'boats.js (model file)';  //MMR REMOVE
+let fname = 'boat.js (model file)';  //MMR REMOVE
 console.log(`${fname} starting...`);  //MMR REMOVE
 
 const db = require('../config/connection');
@@ -44,38 +44,6 @@ function update(boat) {
     `, boat
   );
 }
-// Test it here. This chunk will be removed when the model is built out.
-let revisedBoat = {
-  creator_id: "Alan",
-  photo:  "tbd",
-  description: "FramBoise",
-  location:"New Joisy",
-  boat_id: 2
-  };
-
-console.log(`${fname} - before revisions`);
-getAll()
-.then(data =>{
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-
-
-update (revisedBoat)
-.then(data =>{
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-console.log(`${fname} - get all boats to see that the revised one is there.`);
-
-getAll()
-.then(data =>{
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
 
 // destroy
 function destroy(id) {

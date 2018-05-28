@@ -2,9 +2,9 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-//const authController = require('./controllers/authController');
+const authController = require('./controllers/authController');
 
-//const apiRouter = require('./routes/api');
+const apiRouter = require('./routes/apiRouter');
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.get('/happy', (req, res) => {
   res.send(':-) :-) :-)');
 })
 
-//app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
