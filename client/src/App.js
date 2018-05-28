@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor (props) {
+  let fname = 'App.js';
+  console.log(`${fname} - in constructor...`);  //MMR REMOVE WHEN LIVE
+    super(props);
+  }
+
+  componentDidMount () {
+  let fname = 'App.js';
+  console.log(`${fname} - in componentDidMount...`);
+
+  }
+
   render() {
+  let fname = 'App.js';
+  console.log(`${fname} - in render...`);
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>DAYSAIL APP</h1>
       </div>
     );
   }
 }
 
 export default App;
+
+// let fname = 'App.js';
+// console.log(`${fname} starting...`);  //MMR REMOVE WHEN LIVE
+
+// console.log(`${fname} complete.`);  //MMR REMOVE WHEN LIVE
