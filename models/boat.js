@@ -5,6 +5,7 @@ const db = require('../config/connection');
 
 //get all
 function getAll() {
+  console.log(`${fname} handling getAll`);
   return queryPromise = db.any(`
     SELECT * FROM boats`)
 }
@@ -22,6 +23,7 @@ function getOne(id) {
 function create(boat) {
   // provide default value of null for creator_id.
   if (!boat.creator_id) boat.creator_id = null;
+  console.log(`${fname} create - contents of new boat object: `, boat);
   return queryPromise = db.one(`
     INSERT INTO boats (creator_id, photo, description, location)
     VALUES ($/creator_id/, $/photo/, $/description/, $/location/)
@@ -36,9 +38,7 @@ function create(boat) {
 function update(boat) {
   return queryPromise = db.one(`
     UPDATE boats
-    SET photo = $/photo/,
-      description = $/description/,
-      location = $/location/
+    SET photo = $/photo/, description = $/description/, location = $/location/
     WHERE boat_id = $/boat_id/
     RETURNING *
     `, boat

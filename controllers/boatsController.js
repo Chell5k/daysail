@@ -21,7 +21,10 @@ function getOne(req, res, next) {
     .catch(next);
 }
 
+// function show_req_res
+
 function create(req, res, next) {
+  console.log(`${fname} req.body: `, req.body);
   boatDb.create({
     ...req.body,
     creator_id: res.locals.user && res.locals.user.id
@@ -34,6 +37,7 @@ function create(req, res, next) {
 }
 
 function update(req, res, next) {
+  console.log(`${fname} req.body: `, req.body);
   boatDb.update(req.body)
     .then(data => {
       res.locals.boat = data;
