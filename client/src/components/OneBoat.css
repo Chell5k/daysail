@@ -1,0 +1,78 @@
+/* quotes */
+
+.my-boat {
+  max-width: 70vw;
+  margin: 50px;
+  padding: 50px;
+  border: 1px solid grey;
+  background-color: white;
+}
+
+.my-boat h3 {
+  font-family: 'lora', serif;
+  font-size: 3em;
+  padding: 15px 0;
+  line-height: 1.4em;
+}
+
+.my-boat span {
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #61BFAD;
+}
+
+.my-quote a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px;
+  transition: 0.2s all;
+}
+
+.my-boat a:hover {
+  color: #61BFAD;
+  transition: 0.2s all;
+}
+
+.skipper {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.photo {
+  /*font-family: 'inconsolata', monospace;*/
+
+}
+
+
+
+.featured {
+  background-color: #F9F7E8;
+}
+
+/*.fa-star {
+  cursor: pointer;
+}
+
+nav ul {
+  display: flex;
+  margin: 20px;
+}
+
+nav ul li {
+  padding: 15px;
+  font-size: 1.3em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'inconsolata', monospace;
+}
+
+nav ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  font-weight: bold;
+}*/
