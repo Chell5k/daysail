@@ -4,35 +4,63 @@ import { BrowserRouter as Router, Route, Link, withRouter, Redirect } from 'reac
 import { Container, Divider } from 'semantic-ui-react';
 import NavBar from './components/NavBar';
 import Landing from './components/Landing';
+import BoatsList from './components/BoatsList';
+
+import {
+  getBoats,
+  // createBoat,
+  // deleteBoat,
+  // updateBoat,
+  // login
+} from './services/apiService';
 
 class App extends Component {
   constructor (props) {
   let fname = 'App.js';
   console.log(`${fname} - in constructor...`);  //MMR REMOVE WHEN LIVE
     super(props);
+    this.state = {
+      boats: []
+    }
   }
 
   componentDidMount () {
-  let fname = 'App.js';
-  console.log(`${fname} - in componentDidMount...`);
-
+    let fname = 'App.js';
+    console.log(`${fname} - in componentDidMount...`);
+    getBoats()
+      .then(resBody => {
+        console.log(`${fname} resBody.data: `,resBody.data);
+        this.setState({
+          boats: resBody.data
+        })
+      });
   }
 
   render() {
-  let fname = 'App.js';
-  console.log(`${fname} - in render...`);
+    let fname = 'App.js';
+    console.log(`${fname} - in render...`);
     return (
-      <Router>
+    <Router>
+      <div className="App">
 
-        <div className="App">
-          <Container>
-            <h1 className="App-header">DAYSAIL</h1>
-            <h4 className="App-title">"Connecting the recreational sailing community"</h4>
-            <NavBar />
-            <Landing />
-          </Container>
-        </div>
-      </Router>
+        <h1 className="App-header">DAYSAIL</h1>
+        <h4 className="App-title">"Connecting the recreational sailing community"</h4>
+        <NavBar />
+
+        <Route
+          exact path = "/"
+          component = { Landing }
+        />
+
+        <Route
+          exact path = "/boats"
+          render={(props) => (
+            <BoatsList boats={this.state.boats} />
+          )}
+        />
+
+      </div>
+    </Router>
     );
   }
 }

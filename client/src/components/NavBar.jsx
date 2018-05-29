@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './NavBar.css';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 export default class NavBar extends Component {
@@ -11,27 +11,36 @@ export default class NavBar extends Component {
  render() {
     const display = (
       <Menu  color="grey" inverted stackable className='nav'>
-      <Menu.Menu position='right'>
-        <Menu.Item
-          name='login'>
-          <Link to="/login">
-            Login
-          </Link>
-        </Menu.Item>
+        <Menu.Menu position='right'>
 
-        <Menu.Item
-          name='register'>
-          <Link to='/register'>
-            Register
-          </Link>
-        </Menu.Item>
+          <Menu.Item
+            name='boats'>
+            <Link to='/boats'>
+              Sailboats
+            </Link>
+          </Menu.Item>
 
-        <Menu.Item
-          name='boats'>
-          <Link to='/boats'>
-            Sailboats
-          </Link>
-        </Menu.Item>
+          <Menu.Item
+            name='home'>
+            <Link to="/">
+              Home
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item
+            name='login'>
+            <Link to="/login">
+              Login
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item
+            name='register'>
+            <Link to='/register'>
+              <Button primary>Register</Button>
+            </Link>
+          </Menu.Item>
+
         </Menu.Menu>
       </Menu>
     )

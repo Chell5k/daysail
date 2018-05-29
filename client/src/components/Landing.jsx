@@ -8,11 +8,11 @@ import { Container } from 'semantic-ui-react';
 function Landing (props)  {
 return (
   <div>
-    <Container>
+
       <div class= "fullwscreen">
         <img src={Lagoon520} />
       </div>
-    </Container>
+
   </div>
   )
 }
