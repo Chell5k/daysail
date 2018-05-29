@@ -6,7 +6,7 @@ import NavBar from './components/NavBar';
 import Landing from './components/Landing';
 import BoatsList from './components/BoatsList';
 import OneBoat from './components/OneBoat';
-import editBoat from './components/editBoat';
+import EditBoat from './components/EditBoat';
 
 import {
   getBoats,
@@ -72,7 +72,7 @@ class App extends Component {
          <Route
            exact path = "/edit/boats/:id"
            render={(props) => (
-               <editBoat
+               <EditBoat
                index={this.findBoatForEdit(props.match.params.id)}
                boats={this.state.boats} />
              )}

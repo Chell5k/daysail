@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import Loading from './Loading';
 
 
-class editBoat extends Component  {
+class EditBoat extends Component  {
   constructor(props) {
     // let fname = 'editBoat.jsx';
     // console.log(`${fname} - in constructor...`);
     // console.log(`${fname} - props in constructor before super(props)...`,props);
     super(props);
 
-    let fname = 'editBoat.jsx';
+    let fname = 'EditBoat.jsx';
     console.log(`${fname} - props in constructor after super(props)...`,props);
     //there are two fields we will not update
     //boat_id
@@ -34,11 +34,11 @@ class editBoat extends Component  {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    console.log('editBoat: in handleSubmit');
+    console.log('EditBoat: in handleSubmit');
   }
 
   render () {
-   let fname = 'editBoat.jsx';
+   let fname = 'EditBoat.jsx';
     console.log(`${fname} - in render...`);
     return (
       <div>
@@ -61,4 +61,4 @@ class editBoat extends Component  {
   }
 }
 
-export default editBoat;
+export default EditBoat;
