@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Link, withRouter, Redirect } from 'react-router-dom';
+import { Container, Divider } from 'semantic-ui-react';
+import NavBar from './components/NavBar';
+import Landing from './components/Landing';
 
 class App extends Component {
   constructor (props) {
@@ -18,9 +22,17 @@ class App extends Component {
   let fname = 'App.js';
   console.log(`${fname} - in render...`);
     return (
-      <div className="App">
-        <h1>DAYSAIL APP</h1>
-      </div>
+      <Router>
+
+        <div className="App">
+          <Container>
+            <h1 className="App-header">DAYSAIL</h1>
+            <h4 className="App-title">"Connecting the recreational sailing community"</h4>
+            <NavBar />
+            <Landing />
+          </Container>
+        </div>
+      </Router>
     );
   }
 }
