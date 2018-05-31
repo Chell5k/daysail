@@ -4,6 +4,8 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function BoatsList(props) {
+  let fname='BoatsList';
+  console.log(`${fname} - props`, props);
   return(
     <div className="card-list">
       {props.boats.map(boat => (

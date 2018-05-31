@@ -3,42 +3,27 @@ import { Link, Redirect } from 'react-router-dom';
 import Loading from './Loading';
 
 
-class EditBoat extends Component  {
+class CreateBoat extends Component  {
   constructor(props) {
     // let fname = 'editBoat.jsx';
     // console.log(`${fname} - in constructor...`);
     // console.log(`${fname} - props in constructor before super(props)...`,props);
     super(props);
-
-    let fname = 'EditBoat.jsx';
-    console.log(`${fname} - constructor props after super...`,props);
-    //there are two fields we will not update
-    //boat_id
-    //creator_id
-    //Here we will merge in the current values for this boat, so that the form's fields are pre-filled.
     this.state = {
-      redirectOneBoat: false,
-      boat : Object.assign({
+      boat: {
         description: '',
         location: '',
         photo: ''
-      }, props.boats[props.index])
+      }
     };
-    console.log(`${fname} - constructor - this.state `,this.state);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
+ }
 
-  //  handleInputChange(e) {
-  //   const { name, value } = e.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
-
-    handleInputChange(e) {
+  handleInputChange(e) {
+    // let fname='CreateBoat - handleInputChange';
     const {name, value} = e.target;
-    console.log(name, value);
+    // console.log(`${fname} name, value:`, name, value);
     this.setState((prevState, props) => ({
       boat: {
         ...prevState.boat,
@@ -49,24 +34,27 @@ class EditBoat extends Component  {
 
   handleSubmit(e) {
     e.preventDefault();
-    let fname = 'EditBoat.jsx';
-    console.log(this.state);
-    console.log(`${fname}: in handleSubmit`);
-    this.props.onEdit(this.state.boat, this.state.boat.boat_id);
-    console.log(`${fname} - handleSubmit - this.state: `, this.state);
+    let fname = 'CreateBoat - handleSubmit';
+    console.log(`${fname} this.state.boat, this.props.currentUser: `, this.state.boat, this.props.currentUser);
+    this.props.onCreate({...this.state.boat, creator_id: this.props.currentUser});
     this.setState({
-      redirectOneBoat: true
-    })
+      boat: {
+        description: '',
+        location: '',
+        photo: ''
+      }
+    });
+    this.props.history.push('/boats');
   }
 
-  render () {
-   let fname = 'EditBoat.jsx';
-    console.log(`${fname} - in render - this.props, this.state`, this.props, this.state);
+  render(){
+    let fname = 'CreateBoat.jsx';
+    console.log(`${fname} - render - this.props.currentUser, this.state`, this.props.currentUser, this.state);
+
     return (
       <div>
-        <h1>Edit This Boat:</h1>
+        <h1>New Boat Information</h1>
         <form onSubmit={this.handleSubmit}>
-        {this.state.redirectOneBoat && <Redirect to={`/boats/${this.state.boat.boat_id}`} />}
           <label>
             Boat Description:
             <textarea
@@ -110,8 +98,7 @@ class EditBoat extends Component  {
         </form>
       </div>
     )
-
   }
-}
 
-export default EditBoat;
+}
+export default CreateBoat;

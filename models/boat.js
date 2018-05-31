@@ -22,8 +22,9 @@ function getOne(id) {
 // create
 function create(boat) {
   // provide default value of null for creator_id.
-  if (!boat.creator_id) boat.creator_id = null;
-  console.log(`${fname} create - contents of new boat object: `, boat);
+  console.log(`${fname} create - 1. contents of new boat object: `, boat);
+  // if (!boat.creator_id) boat.creator_id = null;
+  console.log(`${fname} create - 2. contents of new boat object: `, boat);
   return queryPromise = db.one(`
     INSERT INTO boats (creator_id, photo, description, location)
     VALUES ($/creator_id/, $/photo/, $/description/, $/location/)

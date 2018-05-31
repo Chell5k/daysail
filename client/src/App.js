@@ -7,13 +7,14 @@ import Landing from './components/Landing';
 import BoatsList from './components/BoatsList';
 import OneBoat from './components/OneBoat';
 import EditBoat from './components/EditBoat';
+import CreateBoat from './components/CreateBoat';
 
 import {
   getBoats,
   getOneBoat,
-  // createBoat,
-  // deleteBoat,
-  // updateBoat,
+  createBoat,
+  deleteBoat,
+  updateBoat,
   // login
 } from './services/apiService';
 
@@ -22,9 +23,14 @@ class App extends Component {
   let fname = 'App.js';
   console.log(`${fname} - in constructor...`);  //MMR REMOVE WHEN LIVE
     super(props);
+    console.log('App: props', props);
     this.state = {
-      boats: []
-    }
+      boats: [],
+      currentUser: 'Chele'
+    };
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount () {
@@ -39,6 +45,46 @@ class App extends Component {
       });
   }
 
+  handleCreate(boat) {
+    createBoat(boat)
+    .then(resBody => {
+      this.setState((prevState, props) => {
+        return {
+          boats: prevState.boats.concat(resBody.data)
+        }
+      })
+    });
+  }
+
+  handleEdit(boat, id) {
+    updateBoat(boat, id)
+    .then(resBody => {
+      this.setState((prevState, props) => {
+        const { boats } = prevState;
+        const indx = boats.findIndex(b => b.boat_id === id);
+        console.log('App - handleEdit - boats, id, indx: ', boats, id, indx);
+        return {
+          boats: [
+            ...boats.slice(0, indx),
+            resBody.data,
+            ...boats.slice(indx + 1)
+          ]
+        }
+      })
+    });
+  }
+
+  handleDelete(id) {
+    console.log('App - in handle delete, about to delete boat_id ',id);
+    deleteBoat(id)
+    .then(respBody => {
+      this.setState((prevState, props) => {
+        return {
+          boats: prevState.boats.filter(boat => boat.boat_id !== id)
+        }
+      })
+    });
+  }
     findBoat(id) {
     console.log(`findBoat - The boat whose index we need from the current array has boat_id of ${id}`);
     const index = this.state.boats.findIndex((boat) => boat.boat_id === parseInt(id, 10));
@@ -70,11 +116,12 @@ class App extends Component {
           />
 
          <Route
-           exact path = "/edit/boats/:id"
+           exact path = "/boats/edit/:id"
            render={(props) => (
                <EditBoat
                index={this.findBoatForEdit(props.match.params.id)}
-               boats={this.state.boats} />
+               boats={this.state.boats}
+               onEdit={this.handleEdit} />
              )}
            />
 
@@ -86,10 +133,22 @@ class App extends Component {
           />
 
           <Route
+            exact path = "/boats/new"
+            render={(props) => (
+              <CreateBoat
+                currentUser = {this.state.currentUser}
+                history = {props.history}
+                onCreate={this.handleCreate}
+               />
+            )}
+          />
+
+          <Route
             exact path = "/boats/:id"
             render={(props) => (
-                <OneBoat
+              <OneBoat
                 index={this.findBoat(props.match.params.id)}
+                onDelete={()=> this.handleDelete(props.match.params.id)}
                 boats={this.state.boats} />
               )}
             />

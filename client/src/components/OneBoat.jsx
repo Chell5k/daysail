@@ -9,15 +9,18 @@ function OneBoat(props) {
     const this_boat = props.boats[props.index];
     console.log('OneBoat - Current Boat: ',this_boat);
     let response;
+
+
     if (!this_boat) {
-
-      <Loading />
-
+        response = (
+            <Loading />
+        )
     }
     else {
       response = (
         <div>
-            <Link to={`/edit/boats/${this_boat.boat_id}`}>Edit</Link>
+            <Link to={`/boats/edit/${this_boat.boat_id}`}>Edit</Link>
+            <button onClick={props.onDelete}>Delete</button>
             <h1>{this_boat.description}</h1>
             <h3>skipper: {this_boat.creator_id}</h3>
             <img src={this_boat.photo} alt='' />
