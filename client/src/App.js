@@ -75,15 +75,19 @@ class App extends Component {
   }
 
   handleDelete(id) {
-    console.log('App - in handle delete, about to delete boat_id ',id);
-    deleteBoat(id)
+    console.log('App - in handle delete, about to delete boat_id  from db',id);
+    console.log('App - this.state.boats before deletion: ', this.state.boats);
+    console.log('App - typeof id', typeof(id));
+    let num_id = parseInt(id, 10);
+    deleteBoat(num_id)
     .then(respBody => {
       this.setState((prevState, props) => {
         return {
-          boats: prevState.boats.filter(boat => boat.boat_id !== id)
+          boats: prevState.boats.filter(boat => boat.boat_id !== num_id)
         }
       })
     });
+     console.log('App - this.state.boats after deletion: ', this.state.boats)
   }
     findBoat(id) {
     console.log(`findBoat - The boat whose index we need from the current array has boat_id of ${id}`);
@@ -91,12 +95,12 @@ class App extends Component {
     console.log('findBoat - boat_id, index (in current state array) ', id, index);
     return index;
   }
-    findBoatForEdit(id) {
-    console.log(`findBoatForEdit - The boat whose index we need from the current array has boat_id of ${id}`);
-    const index = this.state.boats.findIndex((boat) => boat.boat_id === parseInt(id, 10));
-    console.log('findBoatForEdit - boat_id, index (in current state array) ', id, index);
-    return index;
-  }
+  //   findBoatForEdit(id) {
+  //   console.log(`findBoatForEdit - The boat whose index we need from the current array has boat_id of ${id}`);
+  //   const index = this.state.boats.findIndex((boat) => boat.boat_id === parseInt(id, 10));
+  //   console.log('findBoatForEdit - boat_id, index (in current state array) ', id, index);
+  //   return index;
+  // }
   render() {
     let fname = 'App.js';
     console.log(`${fname} - in render...`);
@@ -119,7 +123,7 @@ class App extends Component {
            exact path = "/boats/edit/:id"
            render={(props) => (
                <EditBoat
-               index={this.findBoatForEdit(props.match.params.id)}
+               index={this.findBoat(props.match.params.id)}
                boats={this.state.boats}
                onEdit={this.handleEdit} />
              )}
@@ -149,6 +153,7 @@ class App extends Component {
               <OneBoat
                 index={this.findBoat(props.match.params.id)}
                 onDelete={()=> this.handleDelete(props.match.params.id)}
+                history = {props.history}
                 boats={this.state.boats} />
               )}
             />
@@ -163,7 +168,15 @@ class App extends Component {
 
 export default App;
 
-
+//          <Route
+//           exact path = "/boats/:id"
+//            render={(props) => (
+//              <OneBoat
+//               index={this.findBoat(props.match.params.id)}
+//                onDelete={()=> this.handleDelete(props.match.params.id)}
+//                boats={this.state.boats} />
+//              )}
+//            />
 
 // let fname = 'App.js';
 // console.log(`${fname} starting...`);  //MMR REMOVE WHEN LIVE
