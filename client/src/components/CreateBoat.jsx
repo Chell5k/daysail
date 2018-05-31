@@ -1,6 +1,9 @@
+import './LoginForm.css';
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { Button, Form, Message, Divider } from 'semantic-ui-react'
 import Loading from './Loading';
+
 
 
 class CreateBoat extends Component  {
@@ -52,9 +55,18 @@ class CreateBoat extends Component  {
     console.log(`${fname} - render - this.props.currentUser, this.state`, this.props.currentUser, this.state);
 
     return (
-      <div>
-        <h1>New Boat Information</h1>
+      <div className='create-box'>
+
+      <Form success className='form'>
+
+
         <form onSubmit={this.handleSubmit}>
+          <Message
+            attached
+            content='New Boat Details'
+          />
+
+          <Divider hidden/>
           <label>
             Boat Description:
             <textarea
@@ -93,9 +105,16 @@ class CreateBoat extends Component  {
               name='photo'
             />
           </label>
+
+          <Divider hidden />
+
           <button type='submit'>Save Changes</button>
+
+          <Divider hidden />
+
           <Link to='/'>Cancel</Link>
         </form>
+        </Form>
       </div>
     )
   }

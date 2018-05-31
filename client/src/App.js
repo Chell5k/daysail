@@ -8,6 +8,8 @@ import BoatsList from './components/BoatsList';
 import OneBoat from './components/OneBoat';
 import EditBoat from './components/EditBoat';
 import CreateBoat from './components/CreateBoat';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 import {
   getBoats,
@@ -45,6 +47,16 @@ class App extends Component {
       });
   }
 
+handleLogin(creds) {
+  // this.loginRequest(creds);
+  let fname = 'App.js - handleLogin';
+  console.log(`${fname} - `);
+}
+
+handleRegister(creds) {
+//  console.log(creds)
+  this.registerRequest(creds);
+}
   handleCreate(boat) {
     createBoat(boat)
     .then(resBody => {
@@ -118,7 +130,10 @@ class App extends Component {
             exact path = "/"
             component = { Landing }
           />
-
+        <Route
+          path = "/login"
+          render = { () => (<LoginForm onLogin={this.handleLogin} />)}
+        />
          <Route
            exact path = "/boats/edit/:id"
            render={(props) => (
@@ -129,10 +144,21 @@ class App extends Component {
              )}
            />
 
+        <Route
+          path = "/register"
+          render = {() => (
+            <RegisterForm
+              onLogin={this.handleRegister}
+            />
+          )}
+        />
+
           <Route
             exact path = "/boats"
             render={(props) => (
-              <BoatsList boats={this.state.boats} />
+              <BoatsList
+                boats={this.state.boats}
+              />
             )}
           />
 
