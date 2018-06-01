@@ -14,7 +14,7 @@ import RegisterForm from './components/RegisterForm';
 import {
   getBoats,
   getOneBoat,
-  createBoat,
+//  createBoat,
   deleteBoat,
   updateBoat,
   login,
@@ -56,6 +56,31 @@ class App extends Component {
       });
   }
 
+//MMR I believe I need to have createBoat defined here and not in apiService, because it needs
+// to have this.state in scope.
+  createBoat(boat) {
+    const authToken = localStorage.getItem('authToken');
+    fetch('/api/boats', {
+      method: 'POST',
+      body: JSON.stringify(boat),
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+      .then(resp => {
+        if (!resp.ok) throw new Error(resp.statusMessage);
+        return resp.json();
+      })
+      .then(resBody => {
+        this.setState((prevState, props) => {
+          return {
+            boats: prevState.boats.concat(resBody.boats)
+          }
+        })
+      })
+  }
+
   checkToken()  {
     const authToken = localStorage.getItem('authToken');
     fetch('/api/auth', {
@@ -90,8 +115,7 @@ class App extends Component {
 // }
 
   handleLogin(creds) {
-    let fname = 'App.js - handleLogin';
-    console.log(`${this.fname} - creds `, creds);
+    console.log(`App.js:handleLogin:creds `, creds);
      login(creds)
      .then(user => this.setState({currentUser: user}));
   }
@@ -102,14 +126,13 @@ class App extends Component {
 // }
 
 handleRegister(creds) {
-  let fname = 'App.js - handleRegister';
-  console.log(`${this.fname} - creds`, creds);
+  console.log(`App.js:handleRegister:creds`, creds);
   register(creds);
 
 }
 
   handleCreate(boat) {
-    createBoat(boat)
+    this.createBoat(boat)
     .then(resBody => {
       this.setState((prevState, props) => {
         return {

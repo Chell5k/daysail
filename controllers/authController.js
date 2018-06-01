@@ -5,6 +5,7 @@ const userModel = require('../models/user');
 
 function receiveToken(req, res, next) {
   if(req.headers.authorization) {
+    console.log('authController - receiveToken - req.authToken: ', req.authToken);
     req.authToken = req.headers.authorization.replace(/^Bearer\s/, '');
   }
   next();
@@ -14,6 +15,7 @@ function restrict(req, res, next) {
   tokenService.verify(req.authToken)
   .then(data => {
     res.locals.user = data;
+    console.log('authController - restrict - res.locals.user', res.locals.user)
     next();
   })
   .catch(err => res.status(401).json({
@@ -30,7 +32,7 @@ function register(req, res) {
     }))
     .then(data => tokenService.makeToken({
       username: data.username,
-      id: data.id
+      id: data.user_id
     }))
     .then(token => {
       res.json({
@@ -41,11 +43,10 @@ function register(req, res) {
 
 function login(req, res, next) {
   userModel.login(req.body)
-
     .then(data => {
-      console.log(data)
+      console.log('authController - login -- about to make token with this data object; ', data);
       return tokenService.makeToken({
-      id: data.id,
+      id: data.user_id,
       username: data.username
     })})
     .then(token => {

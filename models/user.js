@@ -30,13 +30,12 @@ function findByUsername(username) {
 }
 
 function login (credentials)  {
-  console.log(`${fname} - login`,credentials)
   return findByUsername(credentials.username)
   .then(username => {
     return bcrypt.compare(credentials.password, username.password)
     .then(match => {
       if(!match) throw new Error('Credentials do not match');
-      console.log(`${fname} - login - before delete`)
+      console.log(`user.js (model) login: match, credentials, username`, match, credentials, username);
       delete username.password;
       return username;
     })

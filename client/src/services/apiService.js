@@ -26,17 +26,41 @@ function getOneBoat(id) {
   return fetch('/api/boats/'+id).then(checkStatus);
 }
 
-function createBoat(boat) {
-  console.log(`${fname} - createBoat`);
-  console.log('apiService - createBoat - boat', boat);
-  return fetch('/api/boats', {
-    method: 'POST',
-    body: JSON.stringify(boat),
-    headers: {
-      'content-type': 'application/json'
-    }
-  }).then(checkStatus);
-}
+// function createBoat(boat) {
+//   console.log(`${fname} - createBoat`);
+//   console.log('apiService - createBoat - boat', boat);
+//   return fetch('/api/boats', {
+//     method: 'POST',
+//     body: JSON.stringify(boat),
+//     headers: {
+//       'content-type': 'application/json'
+//     }
+//   }).then(checkStatus);
+// }
+
+  // createBoat(boat) {
+  //   const authToken = localStorage.getItem('authToken');
+  //   fetch('/api/boats', {
+  //     method: 'POST',
+  //     body: JSON.stringify(boat),
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       'Authorization': `Bearer ${authToken}`
+  //     }
+  //   })
+  //     .then(resp => {
+  //       if (!resp.ok) throw new Error(resp.statusMessage);
+  //       return resp.json();
+  //     })
+  //     .then(resBody => {
+  //       this.setState((prevState, props) => {
+  //         return {
+  //           boats: prevState.boats.concat(resBody.boats)
+  //         }
+  //       })
+  //     })
+  // }
+
 
 function deleteBoat(id) {
   console.log(`${fname} - deleteBoat`);
@@ -59,7 +83,7 @@ function updateBoat(boat, id) {
 // Auth requests
 
 function login(creds) {
-  console.log(`${fname} - auth - login`);
+  console.log(`apiService-auth-login`);
   return fetch('/api/auth/login', {
     method: 'POST',
     body: JSON.stringify(creds),
@@ -84,7 +108,7 @@ function register(creds) {
 export {
   getBoats,
   getOneBoat,
-  createBoat,
+//  createBoat,
   deleteBoat,
   updateBoat,
   login,
