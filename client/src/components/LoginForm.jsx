@@ -22,10 +22,10 @@ class LoginForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log('handling submit')
+    console.log('LoginForm - handleSubmit - this.props ', this.props);
     e.preventDefault();
-    console.log(this.state)
-    // this.props.onLogin(this.state);
+    console.log(this.state);
+    this.props.onLogin(this.state);
     this.setState({
       username: '',
       email: '',
@@ -39,6 +39,7 @@ class LoginForm extends Component {
 
 
   render() {
+    console.log('LoginForm - render - this.state ', this.state);
     return (
   <div className='create-box'>
     <Form success className='form'>
@@ -61,15 +62,15 @@ class LoginForm extends Component {
           />
         </label>
 
-        <label>
-          Email:
-          <input
-            type='email'
-            onChange={this.handleInputChange}
-            value={this.state.email}
-            name='email'
-          />
-        </label>
+          <label>
+            Password:
+            <input
+              type='password'
+              onChange={this.handleInputChange}
+              value={this.state.password}
+              name='password'
+            />
+          </label>
 
           <Divider hidden />
         <Button

@@ -17,46 +17,97 @@ import {
   createBoat,
   deleteBoat,
   updateBoat,
-  // login
+  login,
+  register,
 } from './services/apiService';
 
 class App extends Component {
   constructor (props) {
-  let fname = 'App.js';
-  console.log(`${fname} - in constructor...`);  //MMR REMOVE WHEN LIVE
     super(props);
+    this.fname = 'App.js';
+    console.log(`${this.fname} - in constructor...`);  //MMR REMOVE WHEN LIVE
     console.log('App: props', props);
     this.state = {
       boats: [],
-      currentUser: 'Chele'
+      currentUser: null
     };
     this.handleEdit = this.handleEdit.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
   }
 
   componentDidMount () {
+    console.log(`${this.fname} - componentDidMount`);
+    this.fetchBoats();
+    this.checkToken();
+  }
+
+  fetchBoats () {
     let fname = 'App.js';
-    console.log(`${fname} - in componentDidMount...`);
+    console.log(`${this.fname} - fetchBoats...`);
     getBoats()
       .then(resBody => {
-        console.log(`${fname} resBody.data: `,resBody.data);
+        console.log(`${this.fname} resBody.data: `,resBody.data);
         this.setState({
           boats: resBody.data
         })
       });
   }
 
-handleLogin(creds) {
-  // this.loginRequest(creds);
-  let fname = 'App.js - handleLogin';
-  console.log(`${fname} - `);
+  checkToken()  {
+    const authToken = localStorage.getItem('authToken');
+    fetch('/api/auth', {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+      .then(resp => {
+        if (!resp.ok) throw new Error(resp.message);
+        return resp.json()
+      })
+      .then(respBody => {
+        this.setState({
+          currentUser: respBody.user
+        })
+      })
+      .catch(err => {
+        console.log('not logged in');
+        localStorage.removeItem('authToken');
+        this.setState({
+          currentUser: null
+      });
+   })
 }
 
+// handleLogin(creds) {
+//   this.loginRequest(creds);
+//   let fname = 'App.js - handleLogin';
+//   console.log(`${fname} - `);
+// }
+
+  handleLogin(creds) {
+    let fname = 'App.js - handleLogin';
+    console.log(`${this.fname} - creds `, creds);
+     login(creds)
+     .then(user => this.setState({currentUser: user}));
+  }
+
+// handleRegister(creds) {
+// //  console.log(creds)
+//   this.registerRequest(creds);
+// }
+
 handleRegister(creds) {
-//  console.log(creds)
-  this.registerRequest(creds);
+  let fname = 'App.js - handleRegister';
+  console.log(`${this.fname} - creds`, creds);
+  register(creds);
+
 }
+
   handleCreate(boat) {
     createBoat(boat)
     .then(resBody => {
@@ -115,7 +166,7 @@ handleRegister(creds) {
   // }
   render() {
     let fname = 'App.js';
-    console.log(`${fname} - in render...`);
+    console.log(`${fname} - render - this.state`, this.state);
     return (
     <Router>
       <div className="App">

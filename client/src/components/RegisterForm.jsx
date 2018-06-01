@@ -24,8 +24,8 @@ class RegisterForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
-//    this.props.onLogin(this.state);
+    console.log('RegisterForm - handleSubmit - this.state',this.state)
+    this.props.onLogin(this.state);
     this.setState({
       username: '',
       email: '',
