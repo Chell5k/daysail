@@ -24,11 +24,10 @@ function getOne(req, res, next) {
 // function show_req_res
 
 function create(req, res, next) {
-  console.log(`${fname} req.body: `, req.body);
-  boatDb.create({
-    ...req.body,
-    creator_id: res.locals.user && res.locals.user.id
-  })
+  // creator_id: res.locals.user && res.locals.user.username
+   //   ...req.body,
+  console.log(`boatsController - req.body: `, req.body);
+  boatDb.create(req.body)
     .then(data => {
       res.locals.boat = data;
       next();

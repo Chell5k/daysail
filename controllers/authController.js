@@ -5,8 +5,8 @@ const userModel = require('../models/user');
 
 function receiveToken(req, res, next) {
   if(req.headers.authorization) {
-    console.log('authController - receiveToken - req.authToken: ', req.authToken);
     req.authToken = req.headers.authorization.replace(/^Bearer\s/, '');
+    console.log('authController - receiveToken - req.authToken: ', req.authToken);
   }
   next();
 }

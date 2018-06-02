@@ -60,6 +60,7 @@ class App extends Component {
 // to have this.state in scope.
   createBoat(boat) {
     const authToken = localStorage.getItem('authToken');
+    console.log('createBoat - authToken');
     fetch('/api/boats', {
       method: 'POST',
       body: JSON.stringify(boat),
@@ -70,12 +71,14 @@ class App extends Component {
     })
       .then(resp => {
         if (!resp.ok) throw new Error(resp.statusMessage);
+        console.log('createBoat - got response from server.');
         return resp.json();
       })
       .then(resBody => {
+        console.log('createBoat - resBody: ', resBody);
         this.setState((prevState, props) => {
           return {
-            boats: prevState.boats.concat(resBody.boats)
+            boats: prevState.boats.concat(resBody.data)
           }
         })
       })
@@ -133,13 +136,14 @@ handleRegister(creds) {
 
   handleCreate(boat) {
     this.createBoat(boat)
-    .then(resBody => {
-      this.setState((prevState, props) => {
-        return {
-          boats: prevState.boats.concat(resBody.data)
-        }
-      })
-    });
+    //No need to do the following here, it is done above in this.createBoat.
+    // .then(resBody => {
+    //   this.setState((prevState, props) => {
+    //     return {
+    //       boats: prevState.boats.concat(resBody.data)
+    //     }
+    //   })
+    // });
   }
 
   handleEdit(boat, id) {

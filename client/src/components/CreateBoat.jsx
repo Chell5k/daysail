@@ -38,8 +38,11 @@ class CreateBoat extends Component  {
   handleSubmit(e) {
     e.preventDefault();
     let fname = 'CreateBoat - handleSubmit';
-    console.log(`${fname} this.state.boat, this.props.currentUser: `, this.state.boat, this.props.currentUser);
-    this.props.onCreate({...this.state.boat, creator_id: this.props.currentUser});
+    // console.log(`${fname} this.state.boat`, this.state.boat);
+    // console.log(`${fname} this.props.currentUser.username: `, this.props.currentUser.username);
+    let newBoat={...this.state.boat, creator_id: this.props.currentUser.username}
+    console.log(`${fname} newBoat`, newBoat);
+    this.props.onCreate(newBoat);
     this.setState({
       boat: {
         description: '',
