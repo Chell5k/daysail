@@ -285,6 +285,8 @@ handleRegister(creds) {
             exact path = "/boats/:id"
             render={(props) => (
               <OneBoat
+                {...props}
+                currentUser = {this.state.currentUser}
                 index={this.findBoat(props.match.params.id)}
                 onDelete={()=> this.handleDelete(props.match.params.id)}
                 history = {props.history}
