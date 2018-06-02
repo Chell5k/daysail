@@ -68,13 +68,6 @@ export default class NavBar extends Component {
         </Menu.Item>
 
         <Menu.Item
-          name='add boat'>
-          <Link to='/boats/new'>
-            Add boat
-          </Link>
-        </Menu.Item>
-
-        <Menu.Item
           name='home'>
           <Link to="/">
             Home

@@ -36,6 +36,7 @@ class App extends Component {
     this.handleCreate = this.handleCreate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
 
@@ -122,6 +123,15 @@ class App extends Component {
     console.log(`App.js:handleLogin:creds `, creds);
      login(creds)
      .then(user => this.setState({currentUser: user}));
+  }
+
+  handleLogout(){
+    console.log(`App.js: handleLogout`);
+      localStorage.removeItem('authToken');
+      this.setState({
+ //     boats: [],
+        currentUser: null
+    });
   }
 
 // handleRegister(creds) {
@@ -223,7 +233,12 @@ handleRegister(creds) {
 
         <Route
           path = "/logout"
-          render = { () => (<Logout />)}
+          render = {(props) => (
+            <Logout
+              {...props}
+              onLogout={this.handleLogout}
+            />
+          )}
         />
 
          <Route
