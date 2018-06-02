@@ -10,12 +10,24 @@ export default class NavBar extends Component {
 
  render() {
     const isLoggedOn = !!this.props.currentUser;
+    let username;
+    let welcome;
     console.log('NavBar: isLoggedOn', isLoggedOn);
+    if (isLoggedOn === true) {
+      username = this.props.currentUser.username;
+      welcome = 'Welcome, ' + username + '!';
+      console.log('NavBar - render - username: ', username);
+    }
 
     const display = isLoggedOn ?
       (
-      <Menu  color="grey" inverted stackable className='nav'>
-        <Menu.Menu position='right'>
+      <Menu color="grey" inverted stackable className='nav'>
+        <Menu.Menu text position='right'>
+
+          <Menu.Item header
+            name='welcome-message'>
+              { welcome }
+          </Menu.Item>
 
           <Menu.Item
             name='boats'>

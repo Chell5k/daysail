@@ -132,6 +132,7 @@ class App extends Component {
  //     boats: [],
         currentUser: null
     });
+      console.log(`App.js: handleLogout - this.state after logout`, this.state);
   }
 
 // handleRegister(creds) {
