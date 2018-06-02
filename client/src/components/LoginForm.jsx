@@ -31,6 +31,7 @@ class LoginForm extends Component {
       email: '',
       isUserLoggedIn: true
     });
+    this.props.history.push("/boats");
   }
 
  // goToBoats ()  {
@@ -40,6 +41,7 @@ class LoginForm extends Component {
 
   render() {
     console.log('LoginForm - render - this.state ', this.state);
+    console.log('LoginForm - render - this.props', this.props);
     return (
   <div className='create-box'>
     <Form success className='form'>

@@ -10,6 +10,7 @@ import EditBoat from './components/EditBoat';
 import CreateBoat from './components/CreateBoat';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import Logout from './components/Logout';
 
 import {
   getBoats,
@@ -200,7 +201,9 @@ handleRegister(creds) {
 
         <h1 className="App-header">DAYSAIL</h1>
         <h4 className="App-title">"Connecting the recreational sailing community"</h4>
-        <NavBar />
+        <NavBar
+          currentUser={this.state.currentUser}
+        />
 
         <Switch>
 
@@ -210,8 +213,19 @@ handleRegister(creds) {
           />
         <Route
           path = "/login"
-          render = { () => (<LoginForm onLogin={this.handleLogin} />)}
+          render = {(props) => (
+            <LoginForm
+              {...props}
+              onLogin={this.handleLogin}
+            />
+          )}
         />
+
+        <Route
+          path = "/logout"
+          render = { () => (<Logout />)}
+        />
+
          <Route
            exact path = "/boats/edit/:id"
            render={(props) => (

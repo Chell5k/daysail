@@ -13,17 +13,17 @@ br.route('/')
     responseController.sendOkResponse,
     responseController.sendErrorResponse
   )
-  .post(
-  boatsController.create,
-  responseController.sendOkResponse,
-  responseController.sendErrorResponse
-  );
   // .post(
-  //   authController.restrict,
-  //   boatsController.create,
-  //   responseController.sendOkResponse,
-  //   responseController.sendErrorResponse
+  // boatsController.create,
+  // responseController.sendOkResponse,
+  // responseController.sendErrorResponse
   // );
+  .post(
+    authController.restrict,
+    boatsController.create,
+    responseController.sendOkResponse,
+    responseController.sendErrorResponse
+  );
 
 br.route('/:id')
   .get(
