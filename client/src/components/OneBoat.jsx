@@ -28,12 +28,32 @@ class OneBoat extends Component {
     // let loggedOn = !!this.props.currentUser;
     // let username = !!this.props.currentUser ? this.props.currentUser.username : null;
     // let owner    = !!this.props.currentUser ? username === this.boat.creator_id : null;
+
     let boat_ready = !!this.boat ? true : false;
     let display;
 
     if  ( boat_ready )  {
+      let loggedOn = !!this.props.currentUser; //logged on status
+      let username = loggedOn ? this.props.currentUser.username : null;  //name of current user
+      let owner    = loggedOn ? username === this.boat.creator_id : false;  //boolean
+      let ok_to_modify = (loggedOn && owner );
+
+      console.log('OneBoat: loggedOn', loggedOn);
+      console.log('OneBoat: username', username);
+      console.log('OneBoat: owner', owner);
+      console.log('OneBoat: ok_to_modify', ok_to_modify)
+
+      if (ok_to_modify) {
+        //Create the ok to modify response
+        console.log('OneBoat: ok_to_modify: ', ok_to_modify)
         display = (
+
           <div>
+
+
+            <Link to={`/boats/edit/${this.boat.boat_id}`}>Edit</Link>
+            <button onClick={this.handleDelete}>Delete</button>
+
 
             <h1>{this.boat.description}</h1>
             <h3>skipper: {this.boat.creator_id}</h3>
@@ -41,14 +61,33 @@ class OneBoat extends Component {
             <p>Boat id: {this.boat.boat_id}</p>
             <p>Location: {this.boat.location}</p>
 
-          </div>
-        )
-    }
+            </div>
 
-    else  {
-        display =  (
-          <Loading />
-       )
+        )
+        }
+        else {
+          //create the not-ok-to-update response
+          console.log('OneBoat: ok_to_modify: ', ok_to_modify)
+          display = (
+            <div>
+
+            <h1>{this.boat.description}</h1>
+            <h3>skipper: {this.boat.creator_id}</h3>
+            <img src={this.boat.photo} alt='' />
+            <p>Boat id: {this.boat.boat_id}</p>
+            <p>Location: {this.boat.location}</p>
+
+            </div>
+            )
+
+        }
+
+}
+
+    else  {  //boat is not ready
+      display =  (
+       <Loading />
+      )
     }
 
     return (
