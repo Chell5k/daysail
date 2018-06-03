@@ -79,6 +79,13 @@ function updateBoat(boat, id) {
     }
   }).then(checkStatus)
 }
+// Faves
+
+// function getFaves(user) {
+//   console.log('getFaves: dummy function');
+//   let array = [8, 9];
+//   return array;
+// }
 
 // Auth requests
 
@@ -113,4 +120,5 @@ export {
   updateBoat,
   login,
   register,
+//  getFaves
 }

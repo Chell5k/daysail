@@ -54,12 +54,36 @@ function destroy(id) {
   );
 }
 
+// faves
+function boat_faves(user) {
+  return queryPromise = db.any(`
+    SELECT
+      b.boat_id,
+      b.description,
+      b.location,
+      b.photo
+    FROM boat_faves bf
+    INNER JOIN  boats b
+    ON bf.boat_id = b.boat_id
+    WHERE bf.username = $1
+    `, user
+    );
+}
+// MMR use a test block like this to test functions in this file
+// let user = 'daniel';
+// boat_faves(user)
+// .then(data =>{
+//   console.log(data);
+// }).catch(err => {
+//   console.log(err.message);
+// });
 
 module.exports = {
   getAll,
   create,
   getOne,
   destroy,
-  update
+  update,
+  boat_faves
 };
 console.log(`${fname} complete.`);

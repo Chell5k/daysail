@@ -24,11 +24,18 @@ export default class NavBar extends Component {
       <Menu color="grey" inverted stackable className='nav'>
         <Menu.Menu text position='right'>
 
+
           <Menu.Item header
             name='welcome-message'>
-            <Link to='/boats/userview'>
-              <Icon color='red' name='heart' />
+              <Icon circular inverted color='grey' name='user' />
               { welcome }
+          </Menu.Item>
+
+          <Menu.Item
+            name='faves'>
+            <Link to={`/boats/faves/${username}`}>
+              <Icon color='red' name='heart' />
+              Faves
             </Link>
           </Menu.Item>
 

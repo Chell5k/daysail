@@ -12,6 +12,7 @@ import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import UserView from './components/UserView';
 import Logout from './components/Logout';
+import BoatFaves from './components/BoatFaves';
 
 import {
   getBoats,
@@ -21,6 +22,7 @@ import {
   updateBoat,
   login,
   register,
+//  getFaves
 } from './services/apiService';
 
 class App extends Component {
@@ -31,7 +33,8 @@ class App extends Component {
     console.log('App: props', props);
     this.state = {
       boats: [],
-      currentUser: null
+      currentUser: null,
+      currentFaves: []
     };
     this.handleEdit = this.handleEdit.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
@@ -39,6 +42,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
+    // this.getFaves = this.getFaves.bind(this);
   }
 
   componentDidMount () {
@@ -111,7 +115,8 @@ class App extends Component {
         console.log('not logged in');
         localStorage.removeItem('authToken');
         this.setState({
-          currentUser: null
+          currentUser: null,
+          currentFaves: null
       });
    })
 }
@@ -125,7 +130,35 @@ class App extends Component {
   handleLogin(creds) {
     console.log(`App.js:handleLogin:creds `, creds);
      login(creds)
-     .then(user => this.setState({currentUser: user}));
+     .then(user => {
+        console.log('App.js handleLogin - user: ', user);
+        this.setState({currentUser: user});
+        console.log('App.js handlelogin - this.state.currentUser: ', this.state.currentUser);
+        console.log('App.js handlelogin - this.state.currentUser.username: ', this.state.currentUser.username);
+
+        //standin for a database call. Remove when the DB call is working.
+        const getFaves = new Promise (
+          function(resolve, reject) {
+            const boat_faves = [
+              {boat_id: 7},
+              {boat_id: 8}
+            ]
+            if (true) {
+              resolve(boat_faves);
+            } else {
+              const err = new Error('failed');
+              reject(err);
+            }
+          }
+        );
+
+//       getFaves(this.state.currentUser.username)
+         getFaves
+        .then(faves =>{
+            console.log('here are the fake getFaves results.', faves);
+            this.setState({currentFaves: faves})
+          })
+        });
   }
 
   handleLogout(){
@@ -133,7 +166,8 @@ class App extends Component {
       localStorage.removeItem('authToken');
       this.setState({
  //     boats: [],
-        currentUser: null
+        currentUser: null,
+        currentFaves: []
     });
       console.log(`App.js: handleLogout - this.state after logout`, this.state);
   }
@@ -200,12 +234,6 @@ handleRegister(creds) {
     console.log('findBoat - boat_id, index (in current state array) ', id, index);
     return index;
   }
-  //   findBoatForEdit(id) {
-  //   console.log(`findBoatForEdit - The boat whose index we need from the current array has boat_id of ${id}`);
-  //   const index = this.state.boats.findIndex((boat) => boat.boat_id === parseInt(id, 10));
-  //   console.log('findBoatForEdit - boat_id, index (in current state array) ', id, index);
-  //   return index;
-  // }
   render() {
 
     let fname = 'App.js';
@@ -277,11 +305,6 @@ handleRegister(creds) {
           />
 
           <Route
-            exact path = "/boats/userview"
-            component = { UserView }
-          />
-
-          <Route
             exact path = "/boats/:id"
             render={(props) => (
               <OneBoat
@@ -301,6 +324,16 @@ handleRegister(creds) {
                index={this.findBoat(props.match.params.id)}
                boats={this.state.boats}
                onEdit={this.handleEdit} />
+             )}
+           />
+
+         <Route
+           exact path = "/boats/faves/:user"
+           render={(props) => (
+               <BoatFaves
+               {...props}
+               all_boats={this.state.boats}
+               faves={this.state.currentFaves} />
              )}
            />
 

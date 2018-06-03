@@ -53,12 +53,39 @@ function destroy(req, res, next) {
     .catch(next);
 }
 
+
+function boatFaves (req, res, next) {
+  boatDb.boat_faves(req.params.username)
+    .then((data) => {
+      res.locals.boatFaves = data;
+      next()
+    })
+    .catch(next);
+}
+
+// MMR use a block like this to test functions
+// function boatFaves (req, res, next) {
+//   boatDb.boat_faves(req.params.username)
+//     .then((data) => {
+//  //     res.locals.boatFaves = data;
+//       console.log(data);
+//     })
+//     .catch(next);
+// }
+
+// let req = {};
+// let res = {};
+// req['params'] = {};
+// req['params']['username'] = 'daniel';
+//boatFaves(req, res);
+
 module.exports = {
   getAll,
   getOne,
   create,
   update,
-  destroy
+  destroy,
+  boatFaves
 };
 
 console.log(`${fname} complete.`);  //MMR REMOVE WHEN LIVE
