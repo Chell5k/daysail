@@ -55,23 +55,38 @@ function destroy(id) {
 }
 
 // faves
-function boat_faves(user) {
-  return queryPromise = db.any(`
-    SELECT
-      b.boat_id,
-      b.description,
-      b.location,
-      b.photo
-    FROM boat_faves bf
-    INNER JOIN  boats b
-    ON bf.boat_id = b.boat_id
-    WHERE bf.username = $1
-    `, user
-    );
+// function getFaves(user) {
+//   return queryPromise = db.any(`
+//     SELECT
+//       b.boat_id,
+//       b.description,
+//       b.location,
+//       b.photo
+//     FROM boat_faves bf
+//     INNER JOIN  boats b
+//     ON bf.boat_id = b.boat_id
+//     WHERE bf.username = $1
+//     `, user
+//     );
+// }
+
+function getFaves(userObj) {
+  console.log('getFaves-model: userObj', userObj)
+  //MMR Look into the following issue: When I called db.any with req.params.id from the controller, I got nothing back.
+  //The query looked like: return queryPromise = db.any('SELECT * FROM boat_faves WHERE username = $1', user);
+  //To fix,  I called db.any with the object req.params, which is {user: 'daniel'}, for example. To make things clear,
+  //I changed the model function definition to be function getFaves(userObj).
+  //Also: in the heat of the moment i added the output to res.locals.boatfaves, but the function
+  //that turns it into json is looking for ONLY res.locals.boat OR res.locals.boats. So the
+  //api appeared to be "working", but no data was back. the json wrapping function is:
+  //responseController.sendOKResponse.
+return queryPromise = db.any(`SELECT boat_id FROM boat_faves WHERE username = $/user/`, userObj);
+
 }
-// MMR use a test block like this to test functions in this file
+
+//MMR use a test block like this to test functions in this file
 // let user = 'daniel';
-// boat_faves(user)
+// getFaves(user)
 // .then(data =>{
 //   console.log(data);
 // }).catch(err => {
@@ -84,6 +99,6 @@ module.exports = {
   getOne,
   destroy,
   update,
-  boat_faves
+  getFaves
 };
 console.log(`${fname} complete.`);

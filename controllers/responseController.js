@@ -3,10 +3,13 @@ console.log(`${fname} starting...`);  //MMR REMOVE WHEN LIVE
 
 
 function sendOkResponse(req, res) {
+  // console.log('sendOKResponse: - res.locals');
   res.json({
     status: 'ok',
     data: res.locals.boat || res.locals.boats
   })
+  console.log('sendOKResponse: - res.locals', res.locals);
+  // console.log('sendOKResponse: - res.locals');
 }
 
 function sendErrorResponse(err, req, res, next) {

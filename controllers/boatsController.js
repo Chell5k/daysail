@@ -54,18 +54,24 @@ function destroy(req, res, next) {
 }
 
 
-function boatFaves (req, res, next) {
-  boatDb.boat_faves(req.params.username)
+function getFaves (req, res, next) {
+  console.log('========')
+  console.log('getFaves-controller req.params', req.params) // {user: 'daniel'}
+  console.log('getFaves-controller req.params.user', req.params.user) // daniel
+    console.log('getFaves-controller req.body', req.body) // {}
+  // console.log('++++++++')
+  // console.log('getFaves-controller req.', req)
+  boatDb.getFaves(req.params)
     .then((data) => {
-      res.locals.boatFaves = data;
+      res.locals.boats = data;
       next()
     })
     .catch(next);
 }
 
 // MMR use a block like this to test functions
-// function boatFaves (req, res, next) {
-//   boatDb.boat_faves(req.params.username)
+// function getFaves (req, res, next) {
+//   boatDb.getFaves(req.params.username)
 //     .then((data) => {
 //  //     res.locals.boatFaves = data;
 //       console.log(data);
@@ -77,7 +83,7 @@ function boatFaves (req, res, next) {
 // let res = {};
 // req['params'] = {};
 // req['params']['username'] = 'daniel';
-//boatFaves(req, res);
+// getFaves(req, res);
 
 module.exports = {
   getAll,
@@ -85,7 +91,7 @@ module.exports = {
   create,
   update,
   destroy,
-  boatFaves
+  getFaves
 };
 
 console.log(`${fname} complete.`);  //MMR REMOVE WHEN LIVE

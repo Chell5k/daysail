@@ -40,7 +40,14 @@ br.route('/:id')
     boatsController.destroy,
     responseController.sendOkResponse,
     responseController.sendErrorResponse
-  )
+  );
+
+br.route('/faves/:user')
+  .get(
+    boatsController.getFaves,
+    responseController.sendOkResponse,
+    responseController.sendErrorResponse
+  );
 
 module.exports = br;
 console.log(`${fname} complete.`);  //MMR REMOVE WHEN LIVE
