@@ -8,7 +8,7 @@ function sendOkResponse(req, res) {
     status: 'ok',
     data: res.locals.boat || res.locals.boats
   })
-  console.log('sendOKResponse: - res.locals', res.locals);
+  //console.log('sendOKResponse: - res.locals', res.locals);
   // console.log('sendOKResponse: - res.locals');
 }
 

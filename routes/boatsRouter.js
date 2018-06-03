@@ -42,12 +42,20 @@ br.route('/:id')
     responseController.sendErrorResponse
   );
 
+br.route('/faves/')
+  .post(
+    boatsController.createFave,
+    responseController.sendOkResponse,
+    responseController.sendErrorResponse
+);
+
 br.route('/faves/:user')
   .get(
     boatsController.getFaves,
     responseController.sendOkResponse,
     responseController.sendErrorResponse
-  );
+  )
+;
 
 module.exports = br;
 console.log(`${fname} complete.`);  //MMR REMOVE WHEN LIVE

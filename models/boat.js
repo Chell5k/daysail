@@ -81,8 +81,30 @@ function getFaves(userObj) {
   //api appeared to be "working", but no data was back. the json wrapping function is:
   //responseController.sendOKResponse.
 return queryPromise = db.any(`SELECT boat_id FROM boat_faves WHERE username = $/user/`, userObj);
-
 }
+
+function createFave(fave) {
+ console.log(`${fname} createFaves - new fave object: `, fave);
+  return queryPromise = db.one(`
+    INSERT INTO boat_faves (username, boat_id)
+    VALUES ($/username/, $/boat_id/)
+    RETURNING *
+    `, fave
+  );
+}
+
+//MMR use a test block like this to test createFaves
+// let fave = {
+//   username: 'daniel',
+//   boat_id: 46
+// }
+
+// createFave(fave)
+// .then(data =>{
+//   console.log(data);
+// }).catch(err => {
+//   console.log(err.message);
+// });
 
 //MMR use a test block like this to test functions in this file
 // let user = 'daniel';
@@ -99,6 +121,7 @@ module.exports = {
   getOne,
   destroy,
   update,
-  getFaves
+  getFaves,
+  createFave
 };
 console.log(`${fname} complete.`);
