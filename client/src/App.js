@@ -136,23 +136,7 @@ class App extends Component {
         console.log('App.js handlelogin - this.state.currentUser: ', this.state.currentUser);
         console.log('App.js handlelogin - this.state.currentUser.username: ', this.state.currentUser.username);
 
-        // //standin for a database call. Remove when the DB call is working.
-        // const getFaves = new Promise (
-        //   function(resolve, reject) {
-        //     const boat_faves = [
-        //       {boat_id: 7},
-        //       {boat_id: 8}
-        //     ]
-        //     if (true) {
-        //       resolve(boat_faves);
-        //     } else {
-        //       const err = new Error('failed');
-        //       reject(err);
-        //     }
-        //   }
-        // );
-        // getFaves
-
+// Load the user's faves when they log in.
        getFaves(this.state.currentUser.username)
         .then(faves =>{
             console.log('here are the ACTUAL faves results.', faves);
@@ -228,12 +212,17 @@ handleRegister(creds) {
     });
      console.log('App - this.state.boats after deletion: ', this.state.boats)
   }
-    findBoat(id) {
-    console.log(`findBoat - The boat whose index we need from the current array has boat_id of ${id}`);
-    const index = this.state.boats.findIndex((boat) => boat.boat_id === parseInt(id, 10));
-    console.log('findBoat - boat_id, index (in current state array) ', id, index);
-    return index;
+
+  findBoat(id) {
+  console.log(`findBoat - The boat whose index we need from the current array has boat_id of ${id}`);
+  const index = this.state.boats.findIndex((boat) => boat.boat_id === parseInt(id, 10));
+  console.log('findBoat - boat_id, index (in current state array) ', id, index);
+  return index;
   }
+
+//handleLike
+//handleUnlike
+
   render() {
 
     let fname = 'App.js';
@@ -313,7 +302,9 @@ handleRegister(creds) {
                 index={this.findBoat(props.match.params.id)}
                 onDelete={()=> this.handleDelete(props.match.params.id)}
                 history = {props.history}
-                boats={this.state.boats} />
+                boats={this.state.boats}
+                faves={this.state.currentFaves}
+                />
               )}
             />
 
