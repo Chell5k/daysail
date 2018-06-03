@@ -26,7 +26,10 @@ export default class NavBar extends Component {
 
           <Menu.Item header
             name='welcome-message'>
+            <Link to='/boats/userview'>
+              <Icon color='red' name='heart' />
               { welcome }
+            </Link>
           </Menu.Item>
 
           <Menu.Item

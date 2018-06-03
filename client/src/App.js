@@ -10,6 +10,7 @@ import EditBoat from './components/EditBoat';
 import CreateBoat from './components/CreateBoat';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import UserView from './components/UserView';
 import Logout from './components/Logout';
 
 import {
@@ -45,6 +46,8 @@ class App extends Component {
     this.fetchBoats();
     this.checkToken();
   }
+
+
 
   fetchBoats () {
     let fname = 'App.js';
@@ -204,6 +207,7 @@ handleRegister(creds) {
   //   return index;
   // }
   render() {
+
     let fname = 'App.js';
     console.log(`${fname} - render - this.state`, this.state);
     return (
@@ -242,15 +246,6 @@ handleRegister(creds) {
           )}
         />
 
-         <Route
-           exact path = "/boats/edit/:id"
-           render={(props) => (
-               <EditBoat
-               index={this.findBoat(props.match.params.id)}
-               boats={this.state.boats}
-               onEdit={this.handleEdit} />
-             )}
-           />
 
         <Route
           path = "/register"
@@ -282,6 +277,11 @@ handleRegister(creds) {
           />
 
           <Route
+            exact path = "/boats/userview"
+            component = { UserView }
+          />
+
+          <Route
             exact path = "/boats/:id"
             render={(props) => (
               <OneBoat
@@ -294,6 +294,15 @@ handleRegister(creds) {
               )}
             />
 
+         <Route
+           exact path = "/boats/edit/:id"
+           render={(props) => (
+               <EditBoat
+               index={this.findBoat(props.match.params.id)}
+               boats={this.state.boats}
+               onEdit={this.handleEdit} />
+             )}
+           />
 
          </Switch>
       </div>
