@@ -81,11 +81,10 @@ function updateBoat(boat, id) {
 }
 // Faves
 
-// function getFaves(user) {
-//   console.log('getFaves: dummy function');
-//   let array = [8, 9];
-//   return array;
-// }
+function getFaves(user) {
+  console.log(`${fname} - getFaves`);
+  return fetch('/api/boats/faves/'+user).then(checkStatus);
+}
 
 // Auth requests
 
@@ -120,5 +119,5 @@ export {
   updateBoat,
   login,
   register,
-//  getFaves
+  getFaves
 }

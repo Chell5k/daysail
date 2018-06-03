@@ -22,7 +22,7 @@ import {
   updateBoat,
   login,
   register,
-//  getFaves
+  getFaves
 } from './services/apiService';
 
 class App extends Component {
@@ -136,27 +136,27 @@ class App extends Component {
         console.log('App.js handlelogin - this.state.currentUser: ', this.state.currentUser);
         console.log('App.js handlelogin - this.state.currentUser.username: ', this.state.currentUser.username);
 
-        //standin for a database call. Remove when the DB call is working.
-        const getFaves = new Promise (
-          function(resolve, reject) {
-            const boat_faves = [
-              {boat_id: 7},
-              {boat_id: 8}
-            ]
-            if (true) {
-              resolve(boat_faves);
-            } else {
-              const err = new Error('failed');
-              reject(err);
-            }
-          }
-        );
+        // //standin for a database call. Remove when the DB call is working.
+        // const getFaves = new Promise (
+        //   function(resolve, reject) {
+        //     const boat_faves = [
+        //       {boat_id: 7},
+        //       {boat_id: 8}
+        //     ]
+        //     if (true) {
+        //       resolve(boat_faves);
+        //     } else {
+        //       const err = new Error('failed');
+        //       reject(err);
+        //     }
+        //   }
+        // );
+        // getFaves
 
-//       getFaves(this.state.currentUser.username)
-         getFaves
+       getFaves(this.state.currentUser.username)
         .then(faves =>{
-            console.log('here are the fake getFaves results.', faves);
-            this.setState({currentFaves: faves})
+            console.log('here are the ACTUAL faves results.', faves);
+            this.setState({currentFaves: faves.data})
           })
         });
   }
