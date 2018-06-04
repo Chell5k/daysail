@@ -42,7 +42,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
-    // this.getFaves = this.getFaves.bind(this);
+    this.handleFave = this.handleFave.bind(this);
   }
 
   componentDidMount () {
@@ -88,6 +88,34 @@ class App extends Component {
         this.setState((prevState, props) => {
           return {
             boats: prevState.boats.concat(resBody.data)
+          }
+        })
+      })
+  }
+
+  createFave(details) {
+    console.log('App.js - createFave details', details);
+
+    const authToken = localStorage.getItem('authToken');
+    console.log('createFave - authToken');
+    fetch('/api/boats/faves', {
+      method: 'POST',
+      body: JSON.stringify(details),
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+      .then(resp => {
+        if (!resp.ok) throw new Error(resp.statusMessage);
+        console.log('createFave - got response from server.');
+        return resp.json();
+      })
+      .then(resBody => {
+        console.log('createFave - resBody: ', resBody);
+        this.setState((prevState, props) => {
+          return {
+            currentFaves: prevState.currentFaves.concat(resBody.data)
           }
         })
       })
@@ -220,8 +248,33 @@ handleRegister(creds) {
   return index;
   }
 
-//handleLike
-//handleUnlike
+//handleFave
+  handleFave(boat_id, user) {
+    console.log('App.js - handleFave - boat_id', boat_id);
+    console.log('App.js - handleFave - user', user);
+    console.log('App.js - handleFave - this.state', this.state);
+
+    //------------------
+    //if boat_id is currently a fave then DELETE. If boat_id is not in the faves array then INSERT
+    let faves = this.state.currentFaves;
+    let username = this.state.currentUser.username;
+    console.log('App.js - handleFave - faves array', faves);
+    console.log('App.js - typeof boat_id', typeof(boat_id));
+    console.log("App.js - typeof faves[0]['boat_id']", typeof(faves[0]['boat_id']));
+    let index = faves.findIndex(fave => fave.boat_id === parseInt(boat_id, 10));
+    let is_fave = index != -1;
+    console.log('App.js - handleFave - index:',index);
+    console.log ('App.js - handleFave - is_fave', is_fave);
+    //-------------------
+
+    if (is_fave) {
+      console.log(`App.js - handleFave - call the DELETE function`);
+      //this.deleteFave();
+    } else {
+      console.log(`App.js - handleFave - call the CREATE function`);
+        this.createFave({boat_id: boat_id, username: username});
+    }
+  }
 
   render() {
 
@@ -301,6 +354,7 @@ handleRegister(creds) {
                 currentUser = {this.state.currentUser}
                 index={this.findBoat(props.match.params.id)}
                 onDelete={()=> this.handleDelete(props.match.params.id)}
+                onToggleFave={()=> this.handleFave(props.match.params.id, this.state.currentUser)}
                 history = {props.history}
                 boats={this.state.boats}
                 faves={this.state.currentFaves}

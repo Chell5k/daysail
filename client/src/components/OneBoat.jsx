@@ -8,20 +8,34 @@ class OneBoat extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      toggle_Like: true
-    };
 
-    console.log('OneBoat - props: ', props);
-    console.log('OneBoat - boat index', props.index);
+    console.log('OneBoat - constructor - props: ', props);
+    console.log('OneBoat - constructor - boat index', props.index);
     this.boat = props.boats[props.index];
-    console.log('OneBoat - Current Boat: ', this.boat);
+    console.log('OneBoat - constructor - Current Boat: ', this.boat);
+
+    let init_faves = this.props.faves;
+    let init_there_are_faves = !! init_faves ? true : false;
+    let init_this_boat_is_a_fave = init_there_are_faves && (init_faves.findIndex(fave => fave.boat_id === this.boat.boat_id) != -1)
+
+    console.log('OneBoat - constructor - init_faves', init_faves);
+    console.log('OneBoat - init_there_are_faves', init_there_are_faves);
+    console.log('OneBoat - init_this_boat_is_a_fave', init_this_boat_is_a_fave);
+
     this.handleDelete = this.handleDelete.bind(this);
     this.handleLike = this.handleLike.bind(this);
-    this.handleUnlike = this.handleUnlike.bind(this);
+    // this.handleUnlike = this.handleUnlike.bind(this);
+
     this.state = {
-      boat : props.boats[props.index]
+      boat : props.boats[props.index],
+      is_fave: init_this_boat_is_a_fave
     }
+
+    console.log('OneBoat - constructor - (end) this.state', this.state);
+  }
+
+  componentDidUpdate() {
+    console.log('OneBoat -componentDidUpdate - this.state', this.state);
   }
 
   handleDelete(e) {
@@ -37,18 +51,18 @@ class OneBoat extends Component {
     let fname = 'OneBoat - handleLike';
     console.log(`${fname}`);
     this.setState(prevState => ({
-      toggle_like: !prevState.toggle_like
+      is_fave: !prevState.is_fave
     }));
-  console.log('OneBoat - handleLike - this.state.toggle_like', this.state.toggle_like);
-//    this.props.onLike();
+    console.log('OneBoat - handleLike - this.state.is_fave', this.state.is_fave);
+    this.props.onToggleFave();
   }
 
-    handleUnlike(e) {
-    let fname = 'OneBoat - handleUnlike';
-    console.log(`${fname}`);
-//    this.props.onUnlike();
+//     handleUnlike(e) {
+//     let fname = 'OneBoat - handleUnlike';
+//     console.log(`${fname}`);
+// //    this.props.onUnlike();
 
-  }
+//   }
 
 
   handleDelete(e) {
@@ -74,7 +88,7 @@ class OneBoat extends Component {
       let username = loggedOn ? this.props.currentUser.username : null;  //name of current user
       let owner    = loggedOn ? username === this.boat.creator_id : false;  //boolean
       let ok_to_modify = (loggedOn && owner ); //only logged on boaters get the update/edit
-      let ok_to_toggle_like = (loggedOn == true);
+      let ok_to_fave = (loggedOn == true);
       let there_are_faves = !!faves ? true : false;
       let this_boat_is_a_fave = there_are_faves && (faves.findIndex(fave => fave.boat_id === this.boat.boat_id) != -1)
 
@@ -82,8 +96,13 @@ class OneBoat extends Component {
       console.log('OneBoat: username', username);
       console.log('OneBoat: owner', owner);
       console.log('OneBoat: ok_to_modify', ok_to_modify)
-      console.log('OneBoat: ok_to_toggle_like', ok_to_toggle_like);
+      console.log('OneBoat: ok_to_fave', ok_to_fave);
       console.log('OneBoat: there_are_faves', there_are_faves);
+
+      //this variable is only accurate if state is lifted via a clickhandler and updated in App's state, and flows
+      //down in a revised  faves array. This is because at the moment, it is referencing the faves array
+      //prop which is only updated in App.js. This variable should probably be read out of local state, which is accurate.
+      //
       console.log('OneBoat: this_boat_is_a_fave', this_boat_is_a_fave);
 
 
@@ -102,7 +121,7 @@ class OneBoat extends Component {
             <button onClick={this.handleDelete}>Delete</button>
 
             <Button
-              content={this_boat_is_a_fave ? 'In your faves' : 'Add to faves'}
+              content={this.state.is_fave ? 'In your faves' : 'Add to faves'}
               onClick={this.handleLike}
             />
 
@@ -116,13 +135,13 @@ class OneBoat extends Component {
 
         )
         }
-        else if (ok_to_toggle_like) {
+        else if (ok_to_fave) {
         display = (
 
           <div>
 
             <Button
-              content={this_boat_is_a_fave ? 'In your faves' : 'Add to faves'}
+              content={this.state.is_fave ? 'In your faves' : 'Add to faves'}
               onClick={this.handleLike}
             />
 
