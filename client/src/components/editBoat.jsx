@@ -1,5 +1,7 @@
+import './EditBoat.css';
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { Container, Button, Form, Message, Divider  } from 'semantic-ui-react';
 import Loading from './Loading';
 
 
@@ -63,52 +65,68 @@ class EditBoat extends Component  {
    let fname = 'EditBoat.jsx';
     console.log(`${fname} - in render - this.props, this.state`, this.props, this.state);
     return (
-      <div>
-        <h1>Edit This Boat:</h1>
-        <form onSubmit={this.handleSubmit}>
-        {this.state.redirectOneBoat && <Redirect to={`/boats/${this.state.boat.boat_id}`} />}
-          <label>
-            Boat Description:
-            <textarea
-              label='Boat Description'
-              type='text'
-              onChange={this.handleInputChange}
-              value={this.state.boat.description}
-              name='description'
-            />
-          </label>
+        <div className='create-box'>
+            <Container>
 
-          <br/>
-          <br/>
+                <Form success className='form'>
+                    <form onSubmit={this.handleSubmit}>
+                    {this.state.redirectOneBoat && <Redirect to={`/boats/${this.state.boat.boat_id}`} />}
+                    <Message
+                      attached
+                      content='Edit Boat Details'
+                    />
+                    <Divider hidden/>
 
-           <label>
-            Boat Location:
-            <textarea
-              label='Boat location'
-              type='text'
-              onChange={this.handleInputChange}
-              value={this.state.boat.location}
-              name='location'
-            />
-          </label>
+                    <label>
+                        Description
+                        <textarea
+                        label='Boat Description'
+                        type='text'
+                        onChange={this.handleInputChange}
+                        value={this.state.boat.description}
+                        name='description'
+                        />
+                    </label>
 
-          <br/>
-          <br/>
+                    <Divider hidden />
 
-           <label>
-            Boat Photo:
-            <textarea
-              label='Boat photo'
-              type='text'
-              onChange={this.handleInputChange}
-              value={this.state.boat.photo}
-              name='photo'
-            />
-          </label>
-          <button type='submit'>Save Changes</button>
-          <Link to='/'>Cancel</Link>
-        </form>
-      </div>
+                    <label>
+                        Location
+                        <textarea
+                        label='Boat location'
+                        type='text'
+                        onChange={this.handleInputChange}
+                        value={this.state.boat.location}
+                        name='location'
+                        />
+                    </label>
+
+                    <Divider hidden />
+
+                    <label>
+                        Photo
+                        <textarea
+                        label='Boat photo'
+                        type='text'
+                        onChange={this.handleInputChange}
+                        value={this.state.boat.photo}
+                        name='photo'
+                    />
+                    </label>
+                    <Divider hidden/>
+
+
+                    <Button type='submit'>Save Changes</Button>
+
+
+                    <Button>
+                    <Link to='/boats'>Cancel</Link>
+                    </Button>
+
+                    </form>
+                </Form>
+            </Container>
+        </div>
     )
 
   }

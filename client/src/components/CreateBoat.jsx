@@ -111,11 +111,11 @@ class CreateBoat extends Component  {
 
           <Divider hidden />
 
-          <button type='submit'>Save Changes</button>
+          <Button type='submit'>Save Changes</Button>
 
-          <Divider hidden />
-
-          <Link to='/'>Cancel</Link>
+          <Button>
+          <Link to='/boats'>Cancel</Link>
+          </Button>
         </form>
         </Form>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image, Button } from 'semantic-ui-react'
+import { Card, Icon, Image, Divider, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
 
@@ -116,9 +116,17 @@ class OneBoat extends Component {
 
           <div>
 
+            <Divider hidden />
+            <Link to={`/boats/edit/${this.boat.boat_id}`}>
+              <Button
+                content='Edit'
+              />
+            </Link>
 
-            <Link to={`/boats/edit/${this.boat.boat_id}`}>Edit</Link>
-            <button onClick={this.handleDelete}>Delete</button>
+            <Button
+              content='Delete'
+              onClick={this.handleDelete}
+            />
 
             <Button
               content={this.state.is_fave ? 'In your faves' : 'Add to faves'}
@@ -126,10 +134,10 @@ class OneBoat extends Component {
             />
 
             <h1>{this.boat.description}</h1>
-            <h3>skipper: {this.boat.creator_id}</h3>
+            <h2>Skipper: {this.boat.creator_id}</h2>
             <img src={this.boat.photo} alt='' />
-            <p>Boat id: {this.boat.boat_id}</p>
-            <p>Location: {this.boat.location}</p>
+            <h2>Boat id: {this.boat.boat_id}</h2>
+            <h3>Location: {this.boat.location}</h3>
 
             </div>
 
@@ -140,16 +148,17 @@ class OneBoat extends Component {
 
           <div>
 
+            <Divider hidden />
             <Button
               content={this.state.is_fave ? 'In your faves' : 'Add to faves'}
               onClick={this.handleFave}
             />
 
             <h1>{this.boat.description}</h1>
-            <h3>skipper: {this.boat.creator_id}</h3>
+            <h2>Skipper: {this.boat.creator_id}</h2>
             <img src={this.boat.photo} alt='' />
-            <p>Boat id: {this.boat.boat_id}</p>
-            <p>Location: {this.boat.location}</p>
+            <h2>Boat id: {this.boat.boat_id}</h2>
+            <h3>Location: {this.boat.location}</h3>
 
             </div>
           )
@@ -160,11 +169,12 @@ class OneBoat extends Component {
           display = (
             <div>
 
+
             <h1>{this.boat.description}</h1>
-            <h3>skipper: {this.boat.creator_id}</h3>
+            <h2>Skipper: {this.boat.creator_id}</h2>
             <img src={this.boat.photo} alt='' />
-            <p>Boat id: {this.boat.boat_id}</p>
-            <p>Location: {this.boat.location}</p>
+            <h2>Boat id: {this.boat.boat_id}</h2>
+            <h3>Location: {this.boat.location}</h3>
 
             </div>
             )

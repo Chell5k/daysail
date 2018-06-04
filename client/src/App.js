@@ -398,6 +398,8 @@ handleRegister(creds) {
            />
 
          </Switch>
+         <div className='App-footer'>
+         </div>
       </div>
     </Router>
     );
