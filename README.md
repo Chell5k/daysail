@@ -31,11 +31,11 @@ Daysail is a web app that aims to connect recreational sailors and sailboat owne
 -- delete the boat.
 
 ## Screenshots
-![](./db_docs/LandingPage.png)
-![](./Registration.png)
-![](./db_docs/Logon.png)
-![](./db_docs/MainPage-Not-Logged-on.png)
-![](./db_docs/MainPage-Logged-on.png)
+![](./doc_imgs/LandingPage.png)
+![](./doc_imgs/Registration.png)
+![](./doc_imgs/Logon.png)
+![](./doc_imgs/MainPage-Not-Logged-on.png)
+![](./doc_imgs/MainPage-Logged-on.png)
 
 
 ## Components
