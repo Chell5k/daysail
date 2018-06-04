@@ -171,7 +171,14 @@ class App extends Component {
             console.log('here are the ACTUAL faves results.', faves);
             this.setState({currentFaves: faves.data})
           })
-        });
+        }).catch(err => {
+        console.log('not logged in');
+ //       localStorage.removeItem('authToken');
+        this.setState({
+          currentUser: null,
+          currentFaves: null
+      });
+   })
   }
 
   handleLogout(){
