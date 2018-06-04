@@ -106,6 +106,33 @@ function createFave(req, res, next) {
 // console.log('boatsController - test createFave with req.body:', req.body)
 // createFave(req, res);
 
+//from model file
+// function destroyFave(unfave) {
+//   console.log('destroyFave (model) - unfave', unfave)
+//   return queryPromise = db.none(`
+//     DELETE FROM boat_faves WHERE boat_id = $/boat_id/ and username = $/username/
+//     `, unfave
+//   );
+// }
+
+function destroyFave(req, res, next) {
+  boatDb.destroyFave(req.body)
+    .then(() => {
+      next()
+    })
+    .catch(next);
+}
+
+// Tested createFave with this block. Commented out "next()" above for the test.
+// let req = {};
+// let res = {};
+// res.locals = {};
+// req['body'] = {};
+// req['body']['username'] = 'daniel';
+// req['body']['boat_id'] =  3;
+// console.log('boatsController - test destroyFave with req.body:', req.body)
+// destroyFave(req, res);
+
 module.exports = {
   getAll,
   getOne,
@@ -113,7 +140,8 @@ module.exports = {
   update,
   destroy,
   getFaves,
-  createFave
+  createFave,
+  destroyFave
 };
 
 console.log(`${fname} complete.`);  //MMR REMOVE WHEN LIVE

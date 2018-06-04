@@ -115,6 +115,27 @@ function createFave(fave) {
 //   console.log(err.message);
 // });
 
+// destroy
+function destroyFave(unfave) {
+  console.log('destroyFave (model) - unfave', unfave)
+  return queryPromise = db.none(`
+    DELETE FROM boat_faves WHERE boat_id = $/boat_id/ and username = $/username/
+    `, unfave
+  );
+}
+// //MMR use a test block like this to test destroyFave
+// let unfave = {
+//   username: 'daniel',
+//   boat_id: 49
+// };
+
+// destroyFave(unfave)
+// .then(data =>{
+//   console.log(data);
+// }).catch(err => {
+//   console.log(err.message);
+// });
+
 module.exports = {
   getAll,
   create,
@@ -122,6 +143,7 @@ module.exports = {
   destroy,
   update,
   getFaves,
-  createFave
+  createFave,
+  destroyFave
 };
 console.log(`${fname} complete.`);

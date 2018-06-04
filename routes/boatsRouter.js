@@ -55,6 +55,10 @@ br.route('/faves/:user')
     responseController.sendOkResponse,
     responseController.sendErrorResponse
   )
+  .delete(boatsController.destroyFave,
+    responseController.sendOkResponse,
+    responseController.sendErrorResponse
+  );
 ;
 
 module.exports = br;
