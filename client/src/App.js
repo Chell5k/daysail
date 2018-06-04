@@ -22,7 +22,8 @@ import {
   updateBoat,
   login,
   register,
-  getFaves
+  getFaves,
+  deleteFave
 } from './services/apiService';
 
 class App extends Component {
@@ -260,7 +261,7 @@ handleRegister(creds) {
     let username = this.state.currentUser.username;
     console.log('App.js - handleFave - faves array', faves);
     console.log('App.js - typeof boat_id', typeof(boat_id));
-    console.log("App.js - typeof faves[0]['boat_id']", typeof(faves[0]['boat_id']));
+//    console.log("App.js - typeof faves[0]['boat_id']", typeof(faves[0]['boat_id']));
     let index = faves.findIndex(fave => fave.boat_id === parseInt(boat_id, 10));
     let is_fave = index != -1;
     console.log('App.js - handleFave - index:',index);
@@ -269,7 +270,14 @@ handleRegister(creds) {
 
     if (is_fave) {
       console.log(`App.js - handleFave - call the DELETE function`);
-      //this.deleteFave();
+      deleteFave({boat_id: boat_id, username: username})
+      .then(respBody => {
+        this.setState((prevState, props) => {
+          return {
+            currentFaves: prevState.currentFaves.filter(boat => boat.boat_id !== parseInt(boat_id,10))
+          }
+        })
+      });
     } else {
       console.log(`App.js - handleFave - call the CREATE function`);
         this.createFave({boat_id: boat_id, username: username});

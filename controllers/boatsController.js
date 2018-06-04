@@ -116,6 +116,8 @@ function createFave(req, res, next) {
 // }
 
 function destroyFave(req, res, next) {
+  console.log('destroyFave - controller -  req.body', req.body);
+  console.log('destroyFave - controller -  req.params', req.params);
   boatDb.destroyFave(req.body)
     .then(() => {
       next()

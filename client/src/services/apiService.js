@@ -86,6 +86,18 @@ function getFaves(user) {
   return fetch('/api/boats/faves/'+user).then(checkStatus);
 }
 
+function deleteFave(unfave) {
+  console.log(`${fname} - deleteFave unfave`, unfave);
+  let username = unfave.username;
+  return fetch(`/api/boats/faves/${unfave}/`, {
+    method: 'DELETE',
+    body: JSON.stringify(unfave),
+    headers: {
+      'content-type': 'application/json'
+    }
+  }).then(checkStatus)
+}
+
 // Auth requests
 
 function login(creds) {
@@ -119,5 +131,6 @@ export {
   updateBoat,
   login,
   register,
-  getFaves
+  getFaves,
+  deleteFave
 }

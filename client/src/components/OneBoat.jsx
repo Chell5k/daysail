@@ -23,7 +23,7 @@ class OneBoat extends Component {
     console.log('OneBoat - init_this_boat_is_a_fave', init_this_boat_is_a_fave);
 
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleLike = this.handleLike.bind(this);
+    this.handleFave = this.handleFave.bind(this);
     // this.handleUnlike = this.handleUnlike.bind(this);
 
     this.state = {
@@ -46,14 +46,14 @@ class OneBoat extends Component {
   }
 
 // update state to reflect the click....
-  handleLike(e) {
+  handleFave(e) {
     e.preventDefault();
     let fname = 'OneBoat - handleLike';
     console.log(`${fname}`);
     this.setState(prevState => ({
       is_fave: !prevState.is_fave
     }));
-    console.log('OneBoat - handleLike - this.state.is_fave', this.state.is_fave);
+    console.log('OneBoat - handleFave - this.state.is_fave', this.state.is_fave);
     this.props.onToggleFave();
   }
 
@@ -122,7 +122,7 @@ class OneBoat extends Component {
 
             <Button
               content={this.state.is_fave ? 'In your faves' : 'Add to faves'}
-              onClick={this.handleLike}
+              onClick={this.handleFave}
             />
 
             <h1>{this.boat.description}</h1>
@@ -142,7 +142,7 @@ class OneBoat extends Component {
 
             <Button
               content={this.state.is_fave ? 'In your faves' : 'Add to faves'}
-              onClick={this.handleLike}
+              onClick={this.handleFave}
             />
 
             <h1>{this.boat.description}</h1>
