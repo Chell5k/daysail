@@ -31,7 +31,7 @@ export default class NavBar extends Component {
               { welcome }
           </Menu.Item>
 
-          <Menu.Item
+          <Menu.Item color="grey" inverted
             name='faves'>
             <Link to={`/boats/faves/${username}`}>
               <Icon color='red' name='heart' />
@@ -115,7 +115,7 @@ export default class NavBar extends Component {
     )
 
     return (
-      <div>
+      <div className='nav-bar'>
         { display }
       </div>
     )

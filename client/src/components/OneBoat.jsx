@@ -1,3 +1,4 @@
+import './OneBoat.css';
 import React, { Component } from 'react';
 import { Card, Icon, Image, Divider, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';

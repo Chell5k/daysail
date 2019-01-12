@@ -7,7 +7,7 @@ import { Container } from 'semantic-ui-react';
 
 function Landing (props)  {
 return (
-  <div>
+  <div class="landing">
 
       <div class= "fullwscreen">
         <img src={Lagoon520} />

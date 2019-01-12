@@ -15,6 +15,12 @@
   line-height: 1.4em;
 }
 
+img {
+  /*width: 100%;*/
+  width: 600px;
+  max-height:600px;
+}
+
 .my-boat span {
   text-transform: uppercase;
   display: inline-block;

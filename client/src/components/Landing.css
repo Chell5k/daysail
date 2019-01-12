@@ -1,5 +1,9 @@
+.landing {
+  margin-top: 20px;
+}
+
 .fullwscreen img {
  width: 100%;
- height: 500px;
+/* height: 500px;*/
  object-fit: cover;
 }

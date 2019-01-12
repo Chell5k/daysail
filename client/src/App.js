@@ -304,6 +304,8 @@ handleRegister(creds) {
         <NavBar
           currentUser={this.state.currentUser}
         />
+        <div className="clearfix"></div>
+        <div className="App-daysail">
 
         <Switch>
 
@@ -398,7 +400,9 @@ handleRegister(creds) {
            />
 
          </Switch>
+         </div>
          <div className='App-footer'>
+          <p>&copy; 2018 cheledev.com</p>
          </div>
       </div>
     </Router>
